@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC
+"-//Apache Software Foundation//DTD Struts Configuration 2.3//EN"
+"http://struts.apache.org/dtds/struts-2.3.dtd">
+
+<struts>
+
+	<package name="struts" extends="struts-default">
+		<action name="login" class="sample.LoginAction" method="execute">
+			<result name="success">/info.jsp</result>
+			<result name="false">/index.jsp</result>
+		</action>
+
+		<action name="post" class="sample.SqlConnection" method="execute">
+			<result name="ok">/welcome.jsp</result>
+		</action>
+		<action name="get" class="sample.TestRe" method="execute">
+			<result name="success">/welcome.jsp</result>
+			<result name="faile">/register.jsp</result>
+		</action>
+		
+		<action name="showall" class="sample.ListRead" method="excute">
+			<result name="success">/showall.jsp</result>
+			<result name="get">/index.jsp</result>
+		</action>
+
+		<action name="info" class="sample.LoginCheck" method="excute">
+			<result name="success">/info.jsp</result>
+			<result name="fail">/info.jsp</result>
+			<result name="error">/info.jsp</result>
+		</action>
+
+		<action class="sample.LogoutAction" name="logout">
+		<result name="logout">index.jsp</result>
+		</action>
+<!-- 		<action name="show" class="sample.UserAction" method="execute">
+			<result>/info.jsp</result>
+		</action>
+
+		<action name="page" class="sample.UserAction" method="execute">
+			<result type="redirectAction">
+			<param name="actionName">show</param>
+			<param name="pageNow">${pageNow}</param>
+			<param name="totalPage">${totalPage}</param>
+			<param name="pageSize">${pageSize}</param>
+			</result>
+		</action>  -->
+	
+		<action name="userInfo" class="sample.SearchInfoDao" method="execute">
+			<result>/SearchInfo.jsp</result>
+		</action>
+		
+		<action name="page1" class="sample.SearchInfoDao" method="execute">
+			<result type="redirectAction">
+ 			<param name="actionName">userInfo</param>
+			<param name="pageNow">${pageNow}</param>
+			<param name="totalPage">${totalPage}</param>
+			<param name="pageSize">${pageSize}</param>
+			</result>
+		</action>
+		
+<!-- 		<action name="Hello" class="sample.restful">
+    		<result name="success">/success.jsp</result>
+    		<result name="one">/success.jsp</result>
+    	</action> -->
+		
+	</package>
+	
+	<package name="json" namespace="/" extends="json-default">
+		<action name="Hello" class="sample.restful" method="execute">
+    		<result name="one" type="json">
+    		<param name="root">jsonResult</param>
+    		</result>
+    		<result name="success" type="json">
+    		<param name="root">list</param>
+    		</result>
+    	</action>
+	</package>
+	
+</struts>
